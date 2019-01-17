@@ -37,13 +37,11 @@ function cariModus(arr) {
       max = unique[k][1];
       modeResult = unique[k][0];
     }
-
-    if(max === unique.length || max === 1  ) {
-      modeResult = -1
-    } 
-
-
   }
+
+  if(unique.length === 1 || max === 1  ) {
+    modeResult = -1
+  } 
 
 
   return modeResult;
