@@ -1,4 +1,3 @@
-
 /*
 
 //W4-012 - Logic Challenge - Toko X
@@ -19,40 +18,62 @@ siapa saja yang membeli, sisa stock barang dan total pemasukan untuk barang ters
 
 */
 
-function countProfit(shoppers) {
-  
-  let listBarang = [ ['Sepatu Stacattu', 1500000, 10], ['Baju Zoro', 500000, 2], ['Sweater Uniklooh', 175000, 1] ]
-  var final = []
-  
-  for( var i = 0; i <= listBarang.length - 1; i++ ) {
-    var resultObj = {}
-    var tempShoppers = []
-    var tempBarang = 0
-    var tempProfit = 0 
-    resultObj.product = listBarang[i][0]
-    for( var j = 0; j <= shoppers.length - 1; j++ ) {
-      if( listBarang[i][0] === shoppers[j].product) {
-        tempShoppers.push(shoppers[j].name)
-        tempBarang += (listBarang[i][2] - shoppers[j].amount)
-      }
-    }
-    resultObj.shoppers = tempShoppers
-    resultObj.leftOver = tempBarang
-    resultObj.totalProfit = 0
+function countProfit(arr) {
+  var listProduct = [
+    ["Sepatu Stacattu", 1500000, 10],
+    ["Baju Zoro", 500000, 2],
+    ["Sweater Uniklooh", 175000, 1]
+  ];
 
-    final.push(resultObj)
-
-    // looping result 
-    // kalau barang udah ada , apa yg 
-
-
+  if (arr.length === 0) {
+    return [];
   }
-  return final
+
+  var finalAns = [];
+  // var object = {} <--- if we put object outside the for loop, the result pushed to the object will only be the last value
+
+  for (var i = 0; i <= listProduct.length - 1; i++) {
+    // console.log(listProduct[i]) <--- to test if the loop shows the listProduct
+
+    // below reassign array listProduct to new variable, eg : 'Sepatu Stacattu'
+    var theProduct = listProduct[i][0]; // reassign "Sepatu Stacattu to new var theProduct"
+    var productPrice = listProduct[i][1]; // reassign 1500000 to new var productPrice
+    var productQty = listProduct[i][2]; // reassign 10 to new var productQty
+    var qtyBought = 0;
+    var buyer = [];
+
+    object = {}; //object is placed inside loop so that it will store the value after every loop
+    object.product = theProduct;
+    object.shoppers = buyer;
+
+    for (var j = 0; j <= arr.length - 1; j++) {
+      // console.log(arr[j]) <--- to test if the loop shows the parameter arr
+
+      if (theProduct === arr[j].product && productQty > arr[j].amount) {
+        //if found product in arr & listProduct is the same
+        buyer.push(arr[j].name); // push the name of the shoppers to new array buyer set above
+        qtyBought += arr[j].amount;
+      }
+
+    }
+    object.leftOver = productQty - qtyBought;
+    object.totalProfit = qtyBought * productPrice;
+    finalAns.push(object);
+  }
+  // finalAns.push(object) <--- if we put object outside the for loop, the result pushed to the object will only be the last value
+  return finalAns;
 }
 
-
 // TEST CASES
-console.log(countProfit([{name: 'Windi', product: 'Sepatu Stacattu', amount: 2}, {name: 'Vanessa', product: 'Sepatu Stacattu', amount: 3}, {name: 'Rani', product: 'Sweater Uniklooh', amount: 2}]));
+
+console.log()
+console.log(
+  countProfit([
+    { name: "Windi", product: "Sepatu Stacattu", amount: 2 },
+    { name: "Vanessa", product: "Sepatu Stacattu", amount: 3 },
+    { name: "Rani", product: "Sweater Uniklooh", amount: 2 }
+  ])
+);
 //[ { product: 'Sepatu Stacattu',
 //   shoppers: [ 'Windi', 'Vanessa' ],
 //   leftOver: 5,
@@ -66,7 +87,16 @@ console.log(countProfit([{name: 'Windi', product: 'Sepatu Stacattu', amount: 2},
 //   leftOver: 1,
 //   totalProfit: 0 } ]
 
-// console.log(countProfit([{name: 'Windi', product: 'Sepatu Stacattu', amount: 8}, {name: 'Vanessa', product: 'Sepatu Stacattu', amount: 10}, {name: 'Rani', product: 'Sweater Uniklooh', amount: 1}, {name: 'Devi', product: 'Baju Zoro', amount: 1}, {name: 'Lisa', product: 'Baju Zoro', amount: 1}]));
+// console.log(
+//   countProfit([
+//     { name: "Windi", product: "Sepatu Stacattu", amount: 8 },
+//     { name: "Vanessa", product: "Sepatu Stacattu", amount: 10 },
+//     { name: "Rani", product: "Sweater Uniklooh", amount: 1 },
+//     { name: "Devi", product: "Baju Zoro", amount: 1 },
+//     { name: "Lisa", product: "Baju Zoro", amount: 1 }
+//   ])
+// );
+
 // [ { product: 'Sepatu Stacattu',
 //     shoppers: [ 'Windi' ],
 //     leftOver: 2,
@@ -79,7 +109,11 @@ console.log(countProfit([{name: 'Windi', product: 'Sepatu Stacattu', amount: 2},
 //     shoppers: [ 'Rani' ],
 //     leftOver: 0,
 //     totalProfit: 175000 } ]
-// console.log(countProfit([{name: 'Windi', product: 'Sepatu Naiki', amount: 5}]));
+
+
+console.log()
+console.log(countProfit([{name: 'Windi', product: 'Sepatu Naiki', amount: 5}]));
+
 // [ { product: 'Sepatu Stacattu',
 //     shoppers: [],
 //     leftOver: 10,
@@ -92,7 +126,6 @@ console.log(countProfit([{name: 'Windi', product: 'Sepatu Stacattu', amount: 2},
 //     shoppers: [],
 //     leftOver: 1,
 //     totalProfit: 0 } ]
-// console.log(countProfit([])); //[]
 
-
-
+console.log()
+console.log(countProfit([])); //[]

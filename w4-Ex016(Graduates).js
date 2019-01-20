@@ -21,9 +21,43 @@ Output yang diharapkan berupa Object Literal dengan format sebagai berikut:
   ],
   <class>: [] //NOTE: Jika tidak ada student yang lulus, class ini akan diisi oleh array kosong
 }
+
+*/
+
 function graduates (students) {
-  // Code disini
+
+  if( students.length === 0 ) {
+    return []
+  }
+
+  var scoreAbove75 = {}
+
+
+  for( var i = 0; i <= students.length - 1; i++ ) {
+
+    var className = students[i].class //reassign object class ke variable className
+    var studentScore = students[i].score //reassign object score ke variable studentScore
+    var studentName = students[i].name
+
+    //Jika tidak ada object dgn key students[i].class (a.k.a className) eg: foxes 
+    if(!scoreAbove75[className]) {
+      scoreAbove75[className] = [ ] 
+    }
+
+    var tempObj = {}
+
+    if(studentScore > 75) {
+      tempObj.name = studentName,
+      tempObj.score = studentScore
+      scoreAbove75[className].push(tempObj)
+    }
+  }
+
+    return scoreAbove75
 }
+    
+
+// TEST CASE
 
 console.log(graduates([
   {
@@ -58,33 +92,33 @@ console.log(graduates([
 //   ]
 // }
 
-console.log(graduates([
-  {
-    name: 'Alexander',
-    score: 100,
-    class: 'foxes'
-  },
-  {
-    name: 'Alisa',
-    score: 76,
-    class: 'wolves'
-  },
-  {
-    name: 'Vladimir',
-    score: 92,
-    class: 'foxes'
-  },
-  {
-    name: 'Albert',
-    score: 71,
-    class: 'wolves'
-  },
-  {
-    name: 'Viktor',
-    score: 80,
-    class: 'tigers'
-  }
-]));
+// console.log(graduates([
+//   {
+//     name: 'Alexander',
+//     score: 100,
+//     class: 'foxes'
+//   },
+//   {
+//     name: 'Alisa',
+//     score: 76,
+//     class: 'wolves'
+//   },
+//   {
+//     name: 'Vladimir',
+//     score: 92,
+//     class: 'foxes'
+//   },
+//   {
+//     name: 'Albert',
+//     score: 71,
+//     class: 'wolves'
+//   },
+//   {
+//     name: 'Viktor',
+//     score: 80,
+//     class: 'tigers'
+//   }
+// ]));
 
 // {
 //   foxes: [
@@ -101,5 +135,3 @@ console.log(graduates([
 
 
 console.log(graduates([])); //{}
-
-*/

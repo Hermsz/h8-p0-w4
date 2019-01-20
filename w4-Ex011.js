@@ -7,11 +7,11 @@ Diberikan sebuah function shoppingTime(memberId, money) yang menerima dua parame
 
 Toko X sedang melakukan SALE untuk beberapa barang, yaitu:
 
-- Sepatu brand Stacattu seharga 1500000
-- Baju brand Zoro seharga 500000
-- Baju brand H&N seharga 250000
-- Sweater brand Uniklooh seharga 175000
-- Casing Handphone seharga 50000
+- Sepatu brand Stacattu seharga 1,500,000
+- Baju brand Zoro seharga 500,000
+- Baju brand H&N seharga 250,000
+- Sweater brand Uniklooh seharga 175,000
+- Casing Handphone seharga 50,000
 
 Buatlah function yang akan mengembalikan sebuah object dimana object tersebut berisikan informasi memberId, money, listPurchased dan changeMoney.
 
@@ -29,59 +29,55 @@ maka output:
 
 */
 
-function shoppingTime(memberId, money) {
+function shoppingTime (memberId, money) {
 
-  var listProduct = {  // Data from the question above now displayed as Object
-    'Sepatu Stacattu': 1500000,
-    'Baju Zoro' : 500000,
-    'Baju H&N': 250000,
-    'Sweater Unikloooh': 175000,
-    'Casing Handphone': 50000
-  }
-  var arrKey = Object.keys(listProduct) // Extract keys from object above and convert it to Array
+  var products = [
+    ["Sepatu Stacattu", 1500000],
+    ["Baju Zoro", 500000],
+    ["Baju H&N", 250000],
+    ["Sweater Uniklooh", 175000],
+    ["Casing Handphone", 50000]
+  ]
 
-  var arrValue = Object.values(listProduct) // Extract values from object above and convert it to Array
-
-  if( memberId === undefined || money === '' ) {
-    return 'Mohon maaf, toko X hanya berlaku untuk member saja'
-  } else if( memberId === '') {
-    return 'Mohon maaf, toko X hanya berlaku untuk member saja'
-  } else if( money < 50000) {
-    return 'Mohon maaf, uang tidak cukup'
-  } else {
-
-    var object = {}
-    var array = []
-    object.memberId = memberId
-    object.money = money
-
-    for( var i = 0; i <= arrKey.length - 1; i++ ) {
-      if( money >= arrValue[i] ) {
-        array.push(arrKey[i])
-        money -= arrValue[i]
-      } 
+  var object = {}
+  var productsBought = []
   
-    object.listPurchased = array,
-    object.changeMoney = money
+  for(var i = 0; i <= products.length - 1; i++) {
+    if(money >= products[i][1]) {
+      productsBought.push(products[i][0])
+      money -= products[i][1]
     }
+    console.log(money)
   }
+  
+  if(memberId === '') {
+    return "Mohon maaf, toko X hanya berlaku untuk member saja"
+  } else if(money < 50000) {
+    return "Mohon maaf uang anda tidak cukup"
+  } else {
+    
+    object.money = money,
+    object.memberId = memberId,
+    object.listPurchased = productsBought,
+    object.changeMoney = money
 
+  }
   return object
-}
 
+}
 
 
 // TEST CASES
 console.log(shoppingTime('1820RzKrnWn08', 2475000));
-  //{ memberId: '1820RzKrnWn08',
-  // money: 2475000,
-  // listPurchased:
-  //  [ 'Sepatu Stacattu',
-  //    'Baju Zoro',
-  //    'Baju H&N',
-  //    'Sweater Uniklooh',
-  //    'Casing Handphone' ],
-  // changeMoney: 0 }
+//{ memberId: '1820RzKrnWn08',
+// money: 2475000,
+// listPurchased:
+//  [ 'Sepatu Stacattu',
+//    'Baju Zoro',
+//    'Baju H&N',
+//    'Sweater Uniklooh',
+//    'Casing Handphone' ],
+// changeMoney: 0 }
 
 console.log(shoppingTime('82Ku8Ma742', 170000));
 // //{ memberId: '82Ku8Ma742',
@@ -91,4 +87,48 @@ console.log(shoppingTime('82Ku8Ma742', 170000));
 // // changeMoney: 120000 }
 console.log(shoppingTime('', 2475000)); //Mohon maaf, toko X hanya berlaku untuk member saja
 console.log(shoppingTime('234JdhweRxa53', 15000)); //Mohon maaf, uang tidak cukup
-console.log(shoppingTime()); ////Mohon maaf, toko X hanya berlaku untuk member saja
+
+
+
+
+
+// function shoppingTime(memberId, money) {
+
+//   var listProduct = {  // Data from the question above now displayed as Object
+//     'Sepatu Stacattu': 1500000,
+//     'Baju Zoro' : 500000,
+//     'Baju H&N': 250000,
+//     'Sweater Unikloooh': 175000,
+//     'Casing Handphone': 50000
+//   }
+//   var arrKey = Object.keys(listProduct) // Extract keys from object above and convert it to Array
+
+//   var arrValue = Object.values(listProduct) // Extract values from object above and convert it to Array
+
+//   if( memberId === undefined || money === '' ) { 
+//     return 'Mohon maaf, toko X hanya berlaku untuk member saja'
+//   } else if( memberId === '') {
+//     return 'Mohon maaf, toko X hanya berlaku untuk member saja'
+//   } else if( money < 50000) {
+//     return 'Mohon maaf, uang tidak cukup'
+//   } else {
+
+//     var object = {}
+//     var array = []
+//     object.memberId = memberId
+//     object.money = money
+
+//     for( var i = 0; i <= arrKey.length - 1; i++ ) {
+//       if( money >= arrValue[i] ) {
+//         array.push(arrKey[i]) 
+//         money -= arrValue[i]
+//       } 
+  
+//     object.listPurchased = array,
+//     object.changeMoney = money
+//     }
+//   }
+
+//   return object
+// }
+// console.log(shoppingTime()); ////Mohon maaf, toko X hanya berlaku untuk member saja
