@@ -12,6 +12,10 @@ function fpb(angka1, angka2) {
   var factorAngka1 = []; // penampung modulus yg 0 Angka1
   var factorAngka2 = []; // penampung modulus yg 0 Angka2
 
+  if(angka1 === 1 || angka2 === 1) {
+    return 1
+  }
+
   for (var i = angka1; i >= 2; i--) {
     if (angka1 % i === 0) {
       //Kondisi dmn Angka1 di modulus i = 0
