@@ -72,3 +72,45 @@ console.log(cariModus([7, 7, 7, 7, 7])); // -1
 
 //   return object[4];
 // }
+
+// --- Modus Afit Answer ---
+function cariModus(arr) {
+  var numAndCount = [];
+  var totalOccurence = 0;
+
+  // LISTS NUMBERS AND COUNTS
+  for (var i = 0; i < arr.length; i++) {
+    var isExist = false;
+
+    for (var j = 0; j < numAndCount.length; j++) {
+      if (numAndCount[j][0] === arr[i]) {
+        isExist = true;
+        numAndCount[j][1] += 1;
+        totalOccurence += 1
+      }
+    }
+
+    if (isExist === false) {
+      numAndCount.push([arr[i], 1]);
+      totalOccurence += 1;
+    }
+  }
+
+  var maxOccurence = numAndCount[0][1];
+  // FINDS MAX OCCURENCE
+  for (var k = 0; k < numAndCount.length; k++) {
+    if (maxOccurence < numAndCount[k][1]) {
+      maxOccurence = numAndCount[k][1]
+    }
+  }
+
+  // CONDITIONS
+  if (totalOccurence === numAndCount.length || numAndCount.length === 1) {
+    return -1;
+  }
+  for (var l = 0; l < numAndCount.length; l++) {
+    if (numAndCount[l][1] === maxOccurence) {
+      return numAndCount[l][0]
+    }
+  }
+}
